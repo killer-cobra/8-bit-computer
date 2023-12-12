@@ -36,8 +36,13 @@ int main() {
 	std::cout << result[0] << std::endl;
 	std::cout << result[1] << std::endl;
 
+	
+
+
+
 	std::cout << std::endl;
 
 	std::cout << "--------------------" << std::endl;
+
 	std::cout << sizeof(bitField);
 }

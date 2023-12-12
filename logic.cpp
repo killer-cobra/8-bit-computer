@@ -1,5 +1,6 @@
 #include "logic.h"
 #include <iostream>
+#include <ostream>
 
 
 Transistor::Transistor() {
@@ -50,7 +51,8 @@ LogicalGate::LogicalGate(bool entrance, bool exit) {
 }
 
 LogicalGate::~LogicalGate() {
-	delete[] BitsArray;
+	delete [] BitsArray;
+	delete [] Array_8bits;
 }
 
 
@@ -105,3 +107,45 @@ bool* LogicalGate::LogicalFullAdder(bool carry_over_from_loworder, bool term_1, 
 
 	return BitsArray;
 }
+
+bool* LogicalGate::Logical_8_bit_adder(bool terms_1 [8], bool terms_2[8]) {
+	BitsArray = LogicalFullAdder(0, terms_1[0], terms_2[0]);
+
+	Array_8bits[0] = LogicalFullAdder(0, terms_1[0], terms_2[0]);
+	Array_8bits[1] = LogicalFullAdder( BitsArray[1], terms_1[1], terms_2[1]);
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[1], terms_2[1]);
+	Array_8bits[2] = LogicalFullAdder(BitsArray[1], terms_1[2], terms_2[2]);
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[2], terms_2[2]);
+	Array_8bits[3] = LogicalFullAdder(BitsArray[1], terms_1[3], terms_2[3]);
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[3], terms_2[3]);
+	Array_8bits[4] = LogicalFullAdder(BitsArray[1], terms_1[4], terms_2[4]);
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[4], terms_2[4]);
+	Array_8bits[5] = LogicalFullAdder(BitsArray[1], terms_1[5], terms_2[5]);
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[5], terms_2[5]);
+	Array_8bits[6] = LogicalFullAdder(BitsArray[1], terms_1[6], terms_2[6]);
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[6], terms_2[6]);
+	Array_8bits[7] = LogicalFullAdder(BitsArray[1], terms_1[7], terms_2[7]);
+
+
+	BitsArray = LogicalFullAdder(BitsArray[1], terms_1[7], terms_2[7]);
+	Array_8bits[8] = BitsArray[1];
+
+
+	return Array_8bits;
+}
+
+// std::ostream& /* void */ operator <<(std::ostream& os, const bool BitArray_f[2]) {
+//	return os << BitArray_f[0] << " " << BitArray_f[1];
+//} 
+
+std::ostream& operator <<(std::ostream& os, const bool Array_8bits_f[9]) {
+	return os << Array_8bits_f[0] << " " << Array_8bits_f[1] << " " << Array_8bits_f[2] << " " << Array_8bits_f[3] << " " <<
+	Array_8bits_f[4] << " " << Array_8bits_f[5] << " " << Array_8bits_f[6] << " " << Array_8bits_f[7] << " " << Array_8bits_f[8] << " " << Array_8bits_f[8];
+}
+

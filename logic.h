@@ -31,7 +31,8 @@ class LogicalGate {
 private:
 	bool entrance : 1;	//  	Вход	( ENTRANCE )
 	bool exit : 1;	//		Выход	(	EXIT   )
-	bool* BitsArray = new bool[2];
+	bool *BitsArray = new bool[2];
+	bool* Array_8bits = new bool[9];
 
 	void BinaryAdder(bool term_1, bool term_2);
 
@@ -56,10 +57,14 @@ public:
 
 	bool* LogicalFullAdder(bool term_1, bool term_2, bool term_3);
 
+
+
+	bool* Logical_8_bit_adder(bool [8], bool [8]);
 };
 
+//std::ostream& /* void */ operator << (std::ostream &os, const bool[2]);
 
-
+std::ostream& operator << (std::ostream& os, const bool[9]);
 
 
 #endif
